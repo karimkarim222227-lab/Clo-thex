@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clowthex</string>
+    <string name="title_activity_main">Clowthex</string>
+    <string name="package_name">com.clowthex.app</string>
+    <string name="custom_url_scheme">com.clowthex.app</string>
+</resources>

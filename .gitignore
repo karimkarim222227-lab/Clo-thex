@@ -1,0 +1,26 @@
+# Node modules
+node_modules/
+
+# Build artifacts
+/dist/
+/android/app/build/
+/android/build/
+/android/.gradle/
+
+# Capacitor cached assets
+/android/app/src/main/assets/public/
+
+# Keystore and secrets
+.keystore
+keystore.properties
+/android/keystore/
+
+# IDE files
+.vscode/
+*.iml
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
