@@ -51,9 +51,10 @@ jobs:
           echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
 
       - name: Create release keystore from GitHub secret
-        if: ${{ secrets.RELEASE_KEYSTORE_BASE64 != '' && secrets.RELEASE_STORE_PASSWORD != '' && secrets.RELEASE_KEY_ALIAS != '' && secrets.RELEASE_KEY_PASSWORD != '' }}
         run: |
-          echo "$RELEASE_KEYSTORE_BASE64" | base64 --decode > android/release.keystore
+          if [ -n "$RELEASE_KEYSTORE_BASE64" ] && [ -n "$RELEASE_STORE_PASSWORD" ] && [ -n "$RELEASE_KEY_ALIAS" ] && [ -n "$RELEASE_KEY_PASSWORD" ]; then
+            echo "$RELEASE_KEYSTORE_BASE64" | base64 --decode > android/release.keystore
+          fi
 
       - name: Build Android Release APK
         working-directory: android
