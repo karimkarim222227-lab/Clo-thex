@@ -18,7 +18,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
+          cache: 'npm'
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -28,12 +29,6 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
-
-      - name: Build web assets
-        run: npm run build
-
-      - name: Sync Capacitor Android
-        run: npx cap sync android
 
       - name: Prepare Android SDK (commandlinetools)
         run: |
@@ -45,6 +40,12 @@ jobs:
           mv /tmp/cmdline/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
 
       - name: Configure Android SDK local properties
         run: |
