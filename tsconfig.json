@@ -12,7 +12,8 @@
     "jsx": "react-jsx",
     "strict": false,
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": { "@/*": ["./src/*"] },
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src", "capacitor.config.ts"],
   "exclude": ["node_modules", "android", "dist"]
