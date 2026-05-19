@@ -28,7 +28,7 @@ jobs:
           java-version: '17'
 
       - name: Install npm dependencies
-        run: npm install --force
+        run: npm ci
 
       - name: Prepare Android SDK (commandlinetools)
         run: |
