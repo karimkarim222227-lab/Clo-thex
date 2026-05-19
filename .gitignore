@@ -9,7 +9,8 @@ node_modules/
 
 # Capacitor cached assets
 /android/app/src/main/assets/public/
-
+# Android local machine settings
+android/local.properties
 # Keystore and secrets
 .keystore
 keystore.properties
