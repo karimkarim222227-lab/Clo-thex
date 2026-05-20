@@ -28,18 +28,18 @@ jobs:
           java-version: '17'
 
       - name: Install npm dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --prefer-offline --no-audit
 
       - name: Prepare Android SDK (commandlinetools)
         run: |
           sudo apt-get update
           sudo apt-get install -y unzip wget tar lib32stdc++6 lib32z1
-          mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+          sudo mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
           wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O /tmp/cmdline.zip
           unzip -q /tmp/cmdline.zip -d /tmp/cmdline
-          mv /tmp/cmdline/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
-          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+          sudo mv /tmp/cmdline/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+          yes | sudo $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+          sudo $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
       - name: Build web assets
         run: npm run build
@@ -50,6 +50,7 @@ jobs:
       - name: Configure Android SDK local properties
         run: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+          sudo chown -R $(whoami) $ANDROID_SDK_ROOT || true
 
       - name: Create release keystore from GitHub secret
         run: |
